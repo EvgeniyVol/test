@@ -3,30 +3,16 @@ package com.example.shop.domain;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class categories implements UserDetails {
+public class manufacturers implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String category_name;
-
-    public categories() {
-    }
-
-    public categories(String category_name) {
-        this.category_name = category_name;
-    }
-
-    public String getCategory_name() {
-        return category_name;
-    }
+    private String manufacturer_name;
 
     public Integer getId() {
         return id;
@@ -36,8 +22,12 @@ public class categories implements UserDetails {
         this.id = id;
     }
 
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
+    public String getManufacturer_name() {
+        return manufacturer_name;
+    }
+
+    public void setManufacturer_name(String manufacturer_name) {
+        this.manufacturer_name = manufacturer_name;
     }
 
     @Override
@@ -74,4 +64,5 @@ public class categories implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
