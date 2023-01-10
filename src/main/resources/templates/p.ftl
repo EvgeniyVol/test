@@ -3,9 +3,6 @@
 
 <@c.page>
 
-   <#-- <form action="https://ya.ru" method="get">
-        <input type="submit" value="Кнопка №1" />
-    </form>-->
     <table>
         <tr>
             <th>Каталог</th>

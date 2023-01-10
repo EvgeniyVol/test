@@ -39,16 +39,4 @@
         </#list>
         </tbody>
     </table>
-
-<#--
-<#list messages as message>
-<div>
-    <b>${message.id}</b>
-    <span>${message.text}</span>
-    <i>${message.tag}</i>
-    <strong>${message.authorName}</strong>
-</div>
-<#else>
-Товары не найдены
-</#list>-->
 </@c.page>

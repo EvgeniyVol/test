@@ -1,4 +1,4 @@
-package com.example.shop;
+package com.example.shop.controller;
 
 import com.example.shop.domain.categories;
 import com.example.shop.repos.CategoRepo;

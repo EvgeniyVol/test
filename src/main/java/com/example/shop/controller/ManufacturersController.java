@@ -1,10 +1,8 @@
 package com.example.shop.controller;
 
 
-import com.example.shop.CategoController;
 import com.example.shop.domain.manufacturers;
 import com.example.shop.repos.ManufacturersRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

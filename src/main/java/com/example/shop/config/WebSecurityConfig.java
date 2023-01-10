@@ -20,10 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserSevice userSevice;
 
-/*
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-*/
 
 
     @Override
@@ -49,9 +45,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userSevice)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
-  /*  @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userSevice)
-                .passwordEncoder(passwordEncoder);
-    }*/
 }
