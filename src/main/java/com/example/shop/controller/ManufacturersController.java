@@ -7,33 +7,69 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.Map;
 
 @Controller
-@RequestMapping(path="/m")
+@RequestMapping(path="/manufacturers")
 public class ManufacturersController {
 
-    @Autowired
-    private ManufacturersRepo manufacturersRepo;
+    private final ManufacturersRepo manufacturersRepo;
 
-    @GetMapping("/")
-    public String greeting(Map<String, Object> model
-    ) {
-        return "greeting";
+    public ManufacturersController(ManufacturersRepo manufacturersRepo) {
+        this.manufacturersRepo = manufacturersRepo;
     }
 
-    @GetMapping("/all")
-    public String main(Model model){
+    @GetMapping
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model){
         Iterable<manufacturers> manufacturers = manufacturersRepo.findAll();
+
+        if (filter != null && !filter.isEmpty()) {
+            manufacturers = manufacturersRepo.findByManufacturer_name(filter);
+        }else {
+            manufacturers = manufacturersRepo.findAll();
+        }
 
         model.addAttribute("manufacturers", manufacturers);
 
-        return "m";
+        return "manufacturers";
     }
 
+
+    @PostMapping
+    public String add(@RequestParam String manufacturer_name, Map<String, Object> model){
+        manufacturers manufacturers = new manufacturers(manufacturer_name);
+
+        manufacturersRepo.save(manufacturers);
+
+        Iterable<manufacturers> newmanufac = manufacturersRepo.findAll();
+
+        model.put("manufacturers", newmanufac);
+
+
+        return "manufacturers";
+    }
+    /*
+  @PostMapping
+    public String add(@RequestParam String category_name, Map<String, Object> model){
+        categories categories = new categories(category_name);
+
+        categoRepo.save(categories);
+
+        Iterable<categories> newcatego = categoRepo.findAll();
+
+        model.put("categories", newcatego);
+
+        return "categories";
+
+
+
+    }
+*/
   /*  @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,

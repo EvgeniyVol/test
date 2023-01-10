@@ -3,7 +3,6 @@ package com.example.shop.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
 public class orders {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -30,8 +29,8 @@ public class orders {
         this.id_Products = id_Products;
     }
 
-    public Long getId() {
-        return Long.valueOf(id);
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {

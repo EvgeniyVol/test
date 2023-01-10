@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Array;
 import java.util.List;
@@ -119,27 +122,26 @@ public class ProductsController {
         return "orders";
     }
 
-    @GetMapping("delit/{id}")
+    @GetMapping("delit")
     public String delit(@AuthenticationPrincipal User id_User,
-                        @RequestParam orders id,
-                        Model model){
+                        @AuthenticationPrincipal products id_Products,
+                        Map<String, Object> model){
 
+        orders orders = new orders(1,id_User, id_Products);
 
-        ordersRepo.deleteById(id.getId());
-
-        Iterable<orders> order = ordersRepo.findById_User(id_User);
-        model.addAttribute("orders", order);
+        ordersRepo.delete(orders);
 
 
         return "orders";
     }
 
-    @PostMapping(path = "allorders")
-    public String add(@AuthenticationPrincipal User user,
-                      @RequestParam products products,
-                      Map<String, Object> model){
+    @PostMapping("allorders")
+    public String add(@AuthenticationPrincipal User id_User,
+                      @AuthenticationPrincipal products id_Products,
+                      @RequestParam() Integer product_count,
+                      Map<String, Object> model) {
 
-        orders orders = new orders(1,user,products);
+        orders orders = new orders(product_count,id_User,id_Products);
 
         ordersRepo.save(orders);
 

@@ -43,7 +43,7 @@
     </table>
 
 
-<form method="post" action="allorders">
+<form>
     <table>
         <thead>
         <tr>
@@ -60,8 +60,8 @@
                 <td>${products.product_price}</td>
                 <td>${products.id_Categories.category_name}</td>
                 <td>${products.id_Manufacturers.manufacturer_name}</td>
-                <td><input type="text" name="products" value="${products.product_price}"/></td>
-                <td><button type="submit" value=${products}>Добавить</button></td>
+                <td><a href="allorders"><input type="button" value="В корзину" />
+                    </a></td>
             </tr>
         <#else>
             Товары не найдены

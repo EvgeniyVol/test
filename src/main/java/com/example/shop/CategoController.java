@@ -4,6 +4,7 @@ import com.example.shop.domain.categories;
 import com.example.shop.repos.CategoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -16,13 +17,20 @@ public class CategoController {
     private CategoRepo categoRepo;
 
     @GetMapping
-    public String main(Map<String, Object> model){
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model){
         Iterable<categories> categories = categoRepo.findAll();
-        model.put("categories", categories);
-        return "c";
+
+        if (filter != null && !filter.isEmpty()) {
+            categories = categoRepo.findByCategory_name(filter);
+        }else {
+            categories = categoRepo.findAll();
+        }
+
+        model.addAttribute("categories", categories);
+        return "categories";
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public String add(@RequestParam String category_name, Map<String, Object> model){
         categories categories = new categories(category_name);
 
@@ -32,26 +40,10 @@ public class CategoController {
 
         model.put("categories", newcatego);
 
-        return "c";
+        return "categories";
 
 
 
-    }
-
-
-    @PostMapping("/cfilter")
-    public String filter(@RequestParam String filter, Map<String, Object> model) {
-        Iterable<categories> categorie;
-
-        if (filter != null && !filter.isEmpty()) {
-            categorie = categoRepo.findByCategory_name(filter);
-        } else {
-            categorie = categoRepo.findAll();
-        }
-
-        model.put("categories", categorie);
-
-        return "c";
     }
     /*
 

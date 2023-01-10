@@ -31,12 +31,12 @@
                 <tr>
                     <td>${orders.id}</td>
                     <td>${orders.id_Products.product_name}</td>
-                    <td> ${orders.product_count}</td>
-                    <td><a href="delit/${orders}"><input type="button" value="Удалить" />
+                    <td>${orders.product_count}</td>
+                    <td><a href="delit"><input type="button" value="Удалить" />
                         </a></td>
-                    <td><a href="sum"><input type="button" value=" + " />
+                    <td><a href="allorders"><input type="button" value=" + " />
                         </a></td>
-                    <td><a href="minus"><input type="button" value=" - " />
+                    <td><a href="allorders"><input type="button" value=" - " />
                         </a></td>
                 </tr>
            <#-- <#list products as products>
