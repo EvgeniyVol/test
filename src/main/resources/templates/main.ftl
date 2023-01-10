@@ -19,6 +19,33 @@
     <input type="text" name="filter" value="${filter?ifExists}">
     <button type="submit">Найти</button>
 </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Название</th>
+            <th>Заголовок</th>
+            <th>Автор</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list messages as message>
+            <tr>
+
+                <td>${message.id}</td>
+                <td>${message.text}</td>
+                <td>${message.tag}</td>
+                <td>${message.authorName}</td>
+            </tr>
+            <#else>
+                Товары не найдены
+        </#list>
+        </tbody>
+    </table>
+
+<#--
 <#list messages as message>
 <div>
     <b>${message.id}</b>
@@ -28,5 +55,5 @@
 </div>
 <#else>
 Товары не найдены
-</#list>
+</#list>-->
 </@c.page>

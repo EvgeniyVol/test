@@ -32,6 +32,10 @@ public class products {
         this.id_Сategories = id_Сategories;
     }
 
+    public String getСategoriesName(){
+        return id_Сategories != null ? id_Сategories.getCategory_name() : "h";
+    }
+
     public Integer getId() {
         return id;
     }

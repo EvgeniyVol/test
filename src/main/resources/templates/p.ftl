@@ -3,24 +3,44 @@
 
 <@c.page>
 
-    <form action="https://ya.ru" method="get">
+   <#-- <form action="https://ya.ru" method="get">
         <input type="submit" value="Кнопка №1" />
+    </form>-->
+    <div>Каталог</div>
+    <br>
+    <form method="get" action="all">
+        <input type="text" name="name" value="${name?ifExists}">
+        <button type="submit">Найти по названию</button>
     </form>
-<#--    <div>Список продуктов</div>
-    <form method="get" action="/main">
-        <input type="text" name="filter" value="${filter?ifExists}">
-        <button type="submit">Найти</button>
+    <form method="get" action="categories">
+        <input type="text" name="filter" value="${name?ifExists}">
+        <button type="submit">Найти по категории</button>
     </form>
-    <#list messages as message>
-        <div>
-            <b>${message.id}</b>
-            <span>${message.text}</span>
-            <i>${message.tag}</i>
-            <strong>${message.authorName}</strong>
-        </div>
-    <#else>
-        Товары не найдены
-    </#list>-->
+
+    <table>
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Категория</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list products as products>
+            <tr>
+                <td>${products.product_name}</td>
+                <td>${products.product_price}</td>
+                <td>${products.сategoriesName}</td>
+                <td><a href="/user/${products.id}"><input type="button" value="В корзину" />
+                    </a></td>
+            </tr>
+        <#else>
+            Товары не найдены
+        </#list>
+        </tbody>
+    </table>
+
 
 
 </@c.page>
