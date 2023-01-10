@@ -13,7 +13,7 @@
         <button type="submit">Найти по названию</button>
     </form>
     <form method="get" action="categories">
-        <input type="text" name="filter" value="${name?ifExists}">
+        <input type="text" name="categorie" value="${categorie?ifExists}">
         <button type="submit">Найти по категории</button>
     </form>
 
@@ -31,7 +31,7 @@
             <tr>
                 <td>${products.product_name}</td>
                 <td>${products.product_price}</td>
-                <td>${products.сategoriesName}</td>
+                <td>${products.id_Categories.category_name}</td>
                 <td><a href="/user/${products.id}"><input type="button" value="В корзину" />
                     </a></td>
             </tr>

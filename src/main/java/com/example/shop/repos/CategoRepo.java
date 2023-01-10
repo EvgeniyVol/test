@@ -12,4 +12,5 @@ public interface CategoRepo extends CrudRepository<categories, Long> {
     @Query("select c from categories c where c.category_name = ?1")
     List<categories> findByCategory_name(String category_name);
 
+
 }

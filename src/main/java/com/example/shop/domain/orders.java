@@ -2,7 +2,19 @@ package com.example.shop.domain;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
+public class orders {
+    /*@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;*/
+
+    /*
+    *
+    * package com.example.shop.domain;
+
+import javax.persistence.*;
+
+
 public class products {
 
 
@@ -77,4 +89,7 @@ public class products {
     }
 
 
+}
+
+    * */
 }
