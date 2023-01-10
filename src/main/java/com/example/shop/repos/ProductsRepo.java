@@ -20,4 +20,7 @@ public interface ProductsRepo extends CrudRepository<products, Long> {
     @Query("select p from products p where p.id_Categories = ?1")
     List<products> findById_Categories (Iterable<categories> Id_Categories);
 
+    @Query("select p from products p where p.id = ?1")
+    products findById(Integer Id);
+
 }

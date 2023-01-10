@@ -13,4 +13,6 @@ public interface ordersRepo extends CrudRepository<orders, Long> {
     @Query("select o from orders o where o.id_User = ?1")
     List<orders> findById_User(User Id_User);
 
+    void deleteById(Integer Id);
+
 }

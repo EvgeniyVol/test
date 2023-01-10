@@ -3,6 +3,7 @@ package com.example.shop.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "products")
 public class products {
 
 
