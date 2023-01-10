@@ -2,16 +2,17 @@ package com.example.shop.controller;
 
 
 
-import com.example.shop.domain.User;
-import com.example.shop.domain.categories;
-import com.example.shop.domain.products;
+import com.example.shop.domain.*;
 import com.example.shop.repos.CategoRepo;
 import com.example.shop.repos.ProductsRepo;
+import com.example.shop.repos.UserRepo;
+import com.example.shop.repos.ordersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,6 +31,12 @@ public class ProductsController {
 
     @Autowired
     private CategoRepo categoRepo;
+
+
+    @Autowired
+    private ordersRepo ordersRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model
@@ -76,6 +83,69 @@ public class ProductsController {
 
         model.addAttribute("products", products);
         model.addAttribute("categorie", categorie);
+
+        return "p";
+    }
+
+    @GetMapping("orders")
+    public String addBox(@AuthenticationPrincipal User user,
+                         @RequestParam(required = false) String name,
+                         Model model){
+
+        /*User users;
+        users = userRepo.findByUsername(user);
+        Iterable<orders> orders = ordersRepo.findAll();
+
+        orders = ordersRepo.findById_User(users.getId());
+        model.addAttribute("orders", orders);*/
+
+        Iterable<orders> orders = ordersRepo.findById_User(user);
+        model.addAttribute("orders", orders);
+        /*
+        * public String main( {
+        List<products> products = productsRepo.findByProduct_name(name);
+        if (name != null && !name.isEmpty()) {
+            products = productsRepo.findByProduct_name(name);
+        } else {
+            Iterable<products> p = productsRepo.findAll();
+            model.addAttribute("products", p);
+            model.addAttribute("name", name);
+            return "p";
+        }
+        model.addAttribute("products", products);
+        model.addAttribute("name", name);
+
+        return "p";
+        *
+        * */
+
+        return "orders";
+    }
+
+    @GetMapping("delit")
+    public String delit(@AuthenticationPrincipal User id_User,
+                        @AuthenticationPrincipal products id_Products,
+                        Map<String, Object> model){
+
+        orders orders = new orders(1,id_User, id_Products);
+
+        ordersRepo.delete(orders);
+
+
+        return "orders";
+    }
+
+    @PostMapping("allorders")
+    public String add(@AuthenticationPrincipal User id_User,
+                      @AuthenticationPrincipal products id_Products,
+                      @RequestParam() Integer product_count,
+                      Map<String, Object> model) {
+
+        orders orders = new orders(product_count,id_User,id_Products);
+
+        ordersRepo.save(orders);
+
+
 
         return "p";
     }

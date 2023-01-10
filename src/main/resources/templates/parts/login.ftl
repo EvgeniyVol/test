@@ -13,3 +13,11 @@
         <input type="submit" value="Выйти"/>
     </form>
 </#macro>
+
+<#macro Box>
+    <form action="${path}" method="post">
+        <div><input type="submit" value="Корзина"/></div>
+        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    </form>
+</#macro>
+

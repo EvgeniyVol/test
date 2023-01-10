@@ -6,17 +6,44 @@
    <#-- <form action="https://ya.ru" method="get">
         <input type="submit" value="Кнопка №1" />
     </form>-->
-    <div>Каталог</div>
-    <br>
-    <form method="get" action="all">
-        <input type="text" name="name" value="${name?ifExists}">
-        <button type="submit">Найти по названию</button>
-    </form>
-    <form method="get" action="categories">
-        <input type="text" name="categorie" value="${categorie?ifExists}">
-        <button type="submit">Найти по категории</button>
-    </form>
+    <table>
+        <tr>
+            <th>Каталог</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><form action="orders" method="get">
 
+                    <div><input type="submit" value="Корзина"/></div>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                </form></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><@l.logout /></th>
+        </tr>
+    </table>
+
+</a>
+    <br>
+    <br>
+    <table>
+        <tr><form method="get" action="all">
+                <th><input type="text" name="name" value="${name?ifExists}"></th>
+                <th><button type="submit">Найти по названию</button></th>
+            </form></tr>
+        <tr>
+            <form method="get" action="categories">
+                <th><input type="text" name="categorie" value="${categorie?ifExists}"></th>
+                <th><button type="submit">Найти по категории</button></th>
+            </form>
+        </tr>
+    </table>
+
+
+<form>
     <table>
         <thead>
         <tr>
@@ -32,7 +59,8 @@
                 <td>${products.product_name}</td>
                 <td>${products.product_price}</td>
                 <td>${products.id_Categories.category_name}</td>
-                <td><a href="/user/${products.id}"><input type="button" value="В корзину" />
+                <td>${products.id_Manufacturers.manufacturer_name}</td>
+                <td><a href="allorders"><input type="button" value="В корзину" />
                     </a></td>
             </tr>
         <#else>
@@ -40,7 +68,7 @@
         </#list>
         </tbody>
     </table>
-
+    </form>
 
 
 </@c.page>
