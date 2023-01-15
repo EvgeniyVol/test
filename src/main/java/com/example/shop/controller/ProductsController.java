@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(path="/p")
+@RequestMapping(path="/products")
 public class ProductsController {
 
 
@@ -38,13 +38,14 @@ public class ProductsController {
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping("/")
+/*    @GetMapping("/")
     public String greeting(Map<String, Object> model
     ) {
         return "greeting";
-    }
+    }*/
 
-    @GetMapping("/all")
+/*
+    @GetMapping("/serhc")
     public String main(@RequestParam(required = false, defaultValue = "") String name,
                        Model model) {
         List<products> products = productsRepo.findByProduct_name(name);
@@ -61,9 +62,38 @@ public class ProductsController {
 
         return "p";
     }
+*/
 
 
-    @GetMapping("/categories")
+    @GetMapping
+    public String categ(@RequestParam(required = false, defaultValue = "") String name,
+                        @RequestParam(required = false, defaultValue = "") String categorie,
+                        Model model) {
+        Iterable<products> products = productsRepo.findAll();
+        Iterable<categories> categories;
+
+        if (categorie != null && !categorie.isEmpty()&&name != null && !name.isEmpty()) {
+            //categories = categoRepo.findByCategory_name(categorie);
+        } else if (name != null && !name.isEmpty()) {
+            products = productsRepo.findByProduct_name(name);
+        } else if (categorie != null && !categorie.isEmpty()) {
+            categories = categoRepo.findByCategory_name(categorie);
+            products = productsRepo.findById_Categories(categories);
+        } else {
+            Iterable<products> p = productsRepo.findAll();
+            model.addAttribute("products", p);
+            model.addAttribute("name", name);
+            model.addAttribute("categorie", categorie);
+            return "p";
+        }
+
+        model.addAttribute("products", products);
+        model.addAttribute("name", name);
+        model.addAttribute("categorie", categorie);
+
+        return "p";
+    }
+/*    @GetMapping
     public String categ(@RequestParam(required = false, defaultValue = "") String categorie,
                        Model model) {
 
@@ -85,23 +115,30 @@ public class ProductsController {
         model.addAttribute("categorie", categorie);
 
         return "p";
-    }
+    }*/
 
+
+
+    /////
+    /////
+    /////не работает пока что
+    /////
+/*
     @GetMapping("orders")
     public String addBox(@AuthenticationPrincipal User user,
                          @RequestParam(required = false) String name,
                          Model model){
 
-        /*User users;
+        *//*User users;
         users = userRepo.findByUsername(user);
         Iterable<orders> orders = ordersRepo.findAll();
 
         orders = ordersRepo.findById_User(users.getId());
-        model.addAttribute("orders", orders);*/
+        model.addAttribute("orders", orders);*//*
 
         Iterable<orders> orders = ordersRepo.findById_User(user);
         model.addAttribute("orders", orders);
-        /*
+        *//*
         * public String main( {
         List<products> products = productsRepo.findByProduct_name(name);
         if (name != null && !name.isEmpty()) {
@@ -117,7 +154,7 @@ public class ProductsController {
 
         return "p";
         *
-        * */
+        * *//*
 
         return "orders";
     }
@@ -148,8 +185,11 @@ public class ProductsController {
 
 
         return "p";
-    }
-
+    }*/
+    //
+    ///
+    ////Динозавры
+    ///
 /*    @GetMapping("/categories")
     public String categ(@RequestParam(required = false, defaultValue = "") String categorie,
                        Model model) {

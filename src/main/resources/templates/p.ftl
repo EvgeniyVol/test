@@ -30,12 +30,12 @@
     <br>
     <br>
     <table>
-        <tr><form method="get" action="all">
+        <tr><form method="get">
                 <th><input type="text" name="name" value="${name?ifExists}"></th>
                 <th><button type="submit">Найти по названию</button></th>
             </form></tr>
         <tr>
-            <form method="get" action="categories">
+            <form method="get">
                 <th><input type="text" name="categorie" value="${categorie?ifExists}"></th>
                 <th><button type="submit">Найти по категории</button></th>
             </form>
