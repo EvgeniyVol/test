@@ -16,12 +16,12 @@
             <th><@l.logout /></th>
         </tr>
     </table>
-    <form>
+
         <table>
             <thead>
             <tr>
-                <th>Номер</th>
                 <th>Название</th>
+                <th>Бренд</th>
                 <th>Количесвто</th>
                 <th></th>
             </tr>
@@ -29,15 +29,14 @@
             <tbody>
             <#list orders as orders>
                 <tr>
-                    <td>${orders.id}</td>
                     <td>${orders.id_Products.product_name}</td>
+                    <td>${orders.id_Products.id_Manufacturers.manufacturer_name}</td>
                     <td>${orders.product_count}</td>
-                    <td><a href="delit"><input type="button" value="Удалить" />
-                        </a></td>
-                    <td><a href="allorders"><input type="button" value=" + " />
-                        </a></td>
-                    <td><a href="allorders"><input type="button" value=" - " />
-                        </a></td>
+                    <form method="get">
+                        <td><input type="hidden" name="id" value="${orders.id}" /><input type="hidden" name="_csrf" value="${_csrf.token}" /><button type="submit" name="mode" value="${1}">Удалить</button></td>
+                        <td><input type="hidden" name="_csrf" value="${_csrf.token}" /><button type="submit" name="mode" value="${2}">+</button></td>
+                        <td><input type="hidden" name="_csrf" value="${_csrf.token}" /><button type="submit" name="mode" value="${3}">-</button></td>
+                        <td><input type="hidden" name="_csrf" value="${_csrf.token}" /><button type="submit" name="mode" value="${4}">Купить</button></td></form>
                 </tr>
            <#-- <#list products as products>
                 &lt;#&ndash;<tr>
@@ -55,7 +54,7 @@
             </#list>
             </tbody>
         </table>
-    </form>
+
     <a href="http://localhost:8080/products"><input type="button" value="За покупками" /></a>
 <#--
 &lt;#&ndash; <form action="https://ya.ru" method="get">

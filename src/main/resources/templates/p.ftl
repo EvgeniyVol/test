@@ -50,6 +50,7 @@
             <th>Название</th>
             <th>Цена</th>
             <th>Категория</th>
+            <th>Фирма</th>
             <th></th>
         </tr>
         </thead>
@@ -60,8 +61,7 @@
                 <td>${products.product_price}</td>
                 <td>${products.id_Categories.category_name}</td>
                 <td>${products.id_Manufacturers.manufacturer_name}</td>
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                <td><input type="hidden" name="id" value="${products.id}" /><button type="submit">В корзину</button></td>
+                <td><input type="hidden" name="_csrf" value="${_csrf.token}" /><button type="submit" name="id" value="${products.id?ifExists}">В корзину</button></td>
             </tr>
         <#else>
             Товары не найдены
