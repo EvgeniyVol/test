@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 */
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
