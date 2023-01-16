@@ -10,4 +10,5 @@ import java.util.List;
 public interface UserRepo extends CrudRepository<User, Long> {
     @Query("select u from User u where u.username = ?1")
     User findByUsername(String username);
+
 }

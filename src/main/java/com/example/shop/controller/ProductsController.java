@@ -93,6 +93,21 @@ public class ProductsController {
 
         return "p";
     }
+    @PostMapping
+    public String add(@AuthenticationPrincipal User user,
+                      @RequestParam(required = true) Integer id,
+                      Model model){
+        products products = productsRepo.findById(id);
+        orders orders = new orders(1,user,products);
+        ordersRepo.save(orders);
+
+        Iterable<products> p = productsRepo.findAll();
+        model.addAttribute("products", p);
+
+
+        return "p";
+    }
+
 /*    @GetMapping
     public String categ(@RequestParam(required = false, defaultValue = "") String categorie,
                        Model model) {
@@ -129,7 +144,8 @@ public class ProductsController {
                          @RequestParam(required = false) String name,
                          Model model){
 
-        *//*User users;
+        */
+    /*User users;
         users = userRepo.findByUsername(user);
         Iterable<orders> orders = ordersRepo.findAll();
 
@@ -138,7 +154,8 @@ public class ProductsController {
 
         Iterable<orders> orders = ordersRepo.findById_User(user);
         model.addAttribute("orders", orders);
-        *//*
+        */
+    /*
         * public String main( {
         List<products> products = productsRepo.findByProduct_name(name);
         if (name != null && !name.isEmpty()) {
@@ -154,7 +171,8 @@ public class ProductsController {
 
         return "p";
         *
-        * *//*
+        * */
+    /*
 
         return "orders";
     }

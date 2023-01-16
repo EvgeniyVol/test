@@ -56,7 +56,7 @@
             </tbody>
         </table>
     </form>
-    <a href="http://localhost:8080/p/all"><input type="button" value="За покупками" /></a>
+    <a href="http://localhost:8080/products"><input type="button" value="За покупками" /></a>
 <#--
 &lt;#&ndash; <form action="https://ya.ru" method="get">
      <input type="submit" value="Кнопка №1" />

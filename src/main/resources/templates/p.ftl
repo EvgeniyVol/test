@@ -13,10 +13,10 @@
             <th></th>
             <th></th>
             <th></th>
-            <th><form action="orders" method="get">
+            <th><form action="orders" >
 
                     <div><input type="submit" value="Корзина"/></div>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                    <#--<input type="hidden" name="_csrf" value="${_csrf.token}" />-->
                 </form></th>
             <th></th>
             <th></th>
@@ -43,7 +43,7 @@
     </table>
 
 
-<form>
+<form method="post">
     <table>
         <thead>
         <tr>
@@ -60,8 +60,8 @@
                 <td>${products.product_price}</td>
                 <td>${products.id_Categories.category_name}</td>
                 <td>${products.id_Manufacturers.manufacturer_name}</td>
-                <td><a href="allorders"><input type="button" value="В корзину" />
-                    </a></td>
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <td><input type="hidden" name="id" value="${products.id}" /><button type="submit">В корзину</button></td>
             </tr>
         <#else>
             Товары не найдены
