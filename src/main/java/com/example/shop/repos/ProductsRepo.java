@@ -14,11 +14,11 @@ public interface ProductsRepo extends CrudRepository<products, Long> {
 
 
     @Query("select p from products p where p.product_name = ?1")
-    List<products> findByProduct_name(String Product_name);
+    Iterable<products> findByProduct_name(String Product_name);
 
 
     @Query("select p from products p where p.id_Categories = ?1")
-    List<products> findById_Categories (Iterable<categories> Id_Categories);
+    Iterable<products> findById_Categories (Iterable<categories> Id_Categories);
 
     @Query("select p from products p where p.id = ?1")
     products findById(Integer Id);

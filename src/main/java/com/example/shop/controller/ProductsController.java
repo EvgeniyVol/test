@@ -66,30 +66,32 @@ public class ProductsController {
 
 
     @GetMapping
-    public String categ(@RequestParam(required = false, defaultValue = "") String name,
-                        @RequestParam(required = false, defaultValue = "") String categorie,
+    public String categ(@RequestParam(required = false, defaultValue = "0") String name,
+                        @RequestParam(required = false, defaultValue = "0") String categorie,
                         Model model) {
         Iterable<products> products = productsRepo.findAll();
-        Iterable<categories> categories;
+        List<categories> categories= categoRepo.findByCategory_name(categorie);
 
-        if (categorie != null && !categorie.isEmpty()&&name != null && !name.isEmpty()) {
+        if (!categorie.equals("0") && !categorie.isEmpty()&& !name.equals("0") && !name.isEmpty()) {
             //categories = categoRepo.findByCategory_name(categorie);
-        } else if (name != null && !name.isEmpty()) {
+        } else if (!name.equals("0") && !name.isEmpty()) {
             products = productsRepo.findByProduct_name(name);
-        } else if (categorie != null && !categorie.isEmpty()) {
+        } else if (!categorie.equals("0") && !categorie.isEmpty()) {
             categories = categoRepo.findByCategory_name(categorie);
-            products = productsRepo.findById_Categories(categories);
+            if (categories.size()!=0){
+                products = productsRepo.findById_Categories(categories);
+            }else {
+                products = productsRepo.findByProduct_name(name);
+                model.addAttribute("products", products);
+                return "p";
+            }
         } else {
             Iterable<products> p = productsRepo.findAll();
             model.addAttribute("products", p);
-            model.addAttribute("name", name);
-            model.addAttribute("categorie", categorie);
             return "p";
         }
 
         model.addAttribute("products", products);
-        model.addAttribute("name", name);
-        model.addAttribute("categorie", categorie);
 
         return "p";
     }
