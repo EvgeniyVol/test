@@ -71,12 +71,14 @@ public class OrdersController {
             default:{
                 Iterable<orders> order = ordersRepo.findById_User(user);
                 model.addAttribute("orders", order);
+                model.addAttribute("User", user.getUsername());
                 return "orders";
 
             }
         }
         Iterable<orders> order = ordersRepo.findById_User(user);
         model.addAttribute("orders", order);
+        model.addAttribute("User", user.getUsername());
         return "orders";
     }
 

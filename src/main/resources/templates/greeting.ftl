@@ -2,7 +2,7 @@
 
 <@c.page>
     <div>Здраствуй пользователь, ты в магазине спорт товаров</div>
-    <form action="/main" method="get">
+    <form action="/products" method="get">
         <input type="submit" value="Заглинуть в магазин" />
     </form>
 </@c.page>

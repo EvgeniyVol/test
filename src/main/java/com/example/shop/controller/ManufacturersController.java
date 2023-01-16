@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 
+import com.example.shop.CategoController;
 import com.example.shop.domain.manufacturers;
 import com.example.shop.repos.ManufacturersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(path="/manufacturers")
-public class ManufacturersController {
+public class ManufacturersController extends CategoController {
 
     private final ManufacturersRepo manufacturersRepo;
 
@@ -53,36 +54,4 @@ public class ManufacturersController {
 
         return "manufacturers";
     }
-    /*
-  @PostMapping
-    public String add(@RequestParam String category_name, Map<String, Object> model){
-        categories categories = new categories(category_name);
-
-        categoRepo.save(categories);
-
-        Iterable<categories> newcatego = categoRepo.findAll();
-
-        model.put("categories", newcatego);
-
-        return "categories";
-
-
-
-    }
-*/
-  /*  @PostMapping("/main")
-    public String add(
-            @AuthenticationPrincipal User user,
-            @RequestParam String text,
-            @RequestParam String tag, Map<String, Object> model) {
-        Message message = new Message(text, tag, user);
-
-        messageRepo.save(message);
-
-        Iterable<Message> messages = messageRepo.findAll();
-
-        model.put("messages", messages);
-
-        return "main";
-    }*/
 }

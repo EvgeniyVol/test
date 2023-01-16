@@ -10,6 +10,11 @@
             <th></th>
             <th></th>
             <th></th>
+            <th>Пользователь: ${User}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>

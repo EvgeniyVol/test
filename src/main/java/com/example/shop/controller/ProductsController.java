@@ -37,36 +37,9 @@ public class ProductsController {
     private ordersRepo ordersRepo;
     @Autowired
     private UserRepo userRepo;
-
-/*    @GetMapping("/")
-    public String greeting(Map<String, Object> model
-    ) {
-        return "greeting";
-    }*/
-
-/*
-    @GetMapping("/serhc")
-    public String main(@RequestParam(required = false, defaultValue = "") String name,
-                       Model model) {
-        List<products> products = productsRepo.findByProduct_name(name);
-        if (name != null && !name.isEmpty()) {
-            products = productsRepo.findByProduct_name(name);
-        } else {
-            Iterable<products> p = productsRepo.findAll();
-            model.addAttribute("products", p);
-            model.addAttribute("name", name);
-            return "p";
-        }
-        model.addAttribute("products", products);
-        model.addAttribute("name", name);
-
-        return "p";
-    }
-*/
-
-
     @GetMapping
-    public String categ(@RequestParam(required = false, defaultValue = "0") String name,
+    public String categ(@AuthenticationPrincipal User user,
+            @RequestParam(required = false, defaultValue = "0") String name,
                         @RequestParam(required = false, defaultValue = "0") String categorie,
                         Model model) {
         Iterable<products> products = productsRepo.findAll();
@@ -83,16 +56,18 @@ public class ProductsController {
             }else {
                 products = productsRepo.findByProduct_name(name);
                 model.addAttribute("products", products);
+                model.addAttribute("User", user.getUsername());
                 return "p";
             }
         } else {
             Iterable<products> p = productsRepo.findAll();
             model.addAttribute("products", p);
+            model.addAttribute("User", user.getUsername());
             return "p";
         }
 
         model.addAttribute("products", products);
-
+        model.addAttribute("User", user.getUsername());
         return "p";
     }
     @PostMapping
@@ -105,152 +80,8 @@ public class ProductsController {
 
         Iterable<products> p = productsRepo.findAll();
         model.addAttribute("products", p);
-
+        model.addAttribute("User", user.getUsername());
 
         return "p";
     }
-
-/*    @GetMapping
-    public String categ(@RequestParam(required = false, defaultValue = "") String categorie,
-                       Model model) {
-
-        Iterable<categories> categories;
-        if (categorie != null && !categorie.isEmpty()) {
-            categories = categoRepo.findByCategory_name(categorie);
-        } else {
-            Iterable<products> p = productsRepo.findAll();
-            model.addAttribute("products", p);
-            model.addAttribute("categorie", categorie);
-            return "p";
-        }
-
-        List<products> products;
-
-            products = productsRepo.findById_Categories(categories);
-
-        model.addAttribute("products", products);
-        model.addAttribute("categorie", categorie);
-
-        return "p";
-    }*/
-
-
-
-    /////
-    /////
-    /////не работает пока что
-    /////
-/*
-    @GetMapping("orders")
-    public String addBox(@AuthenticationPrincipal User user,
-                         @RequestParam(required = false) String name,
-                         Model model){
-
-        */
-    /*User users;
-        users = userRepo.findByUsername(user);
-        Iterable<orders> orders = ordersRepo.findAll();
-
-        orders = ordersRepo.findById_User(users.getId());
-        model.addAttribute("orders", orders);*//*
-
-        Iterable<orders> orders = ordersRepo.findById_User(user);
-        model.addAttribute("orders", orders);
-        */
-    /*
-        * public String main( {
-        List<products> products = productsRepo.findByProduct_name(name);
-        if (name != null && !name.isEmpty()) {
-            products = productsRepo.findByProduct_name(name);
-        } else {
-            Iterable<products> p = productsRepo.findAll();
-            model.addAttribute("products", p);
-            model.addAttribute("name", name);
-            return "p";
-        }
-        model.addAttribute("products", products);
-        model.addAttribute("name", name);
-
-        return "p";
-        *
-        * */
-    /*
-
-        return "orders";
-    }
-
-    @GetMapping("delit")
-    public String delit(@AuthenticationPrincipal User id_User,
-                        @AuthenticationPrincipal products id_Products,
-                        Map<String, Object> model){
-
-        orders orders = new orders(1,id_User, id_Products);
-
-        ordersRepo.delete(orders);
-
-
-        return "orders";
-    }
-
-    @PostMapping("allorders")
-    public String add(@AuthenticationPrincipal User id_User,
-                      @AuthenticationPrincipal products id_Products,
-                      @RequestParam() Integer product_count,
-                      Map<String, Object> model) {
-
-        orders orders = new orders(product_count,id_User,id_Products);
-
-        ordersRepo.save(orders);
-
-
-
-        return "p";
-    }*/
-    //
-    ///
-    ////Динозавры
-    ///
-/*    @GetMapping("/categories")
-    public String categ(@RequestParam(required = false, defaultValue = "") String categorie,
-                       Model model) {
-        Iterable<products> products = productsRepo.findAll();
-        Iterable<categories> categories = categoRepo.findAll();
-
-        if (categorie != null && !categorie.isEmpty()) {
-            categories = categoRepo.findByCategory_name(categorie);
-        } else {
-            categories = null;
-        }
-
-
-
-        if (categorie != null && !categorie.isEmpty()) {
-            products = productsRepo.findById_Сategories(categorie);
-        } else {
-            products = productsRepo.findAll();
-        }
-        model.addAttribute("products", products);
-        model.addAttribute("categories", categorie);
-
-        return "p";
-    }*/
-    /*
-    @Autowired
-    private ProductsRepo ProductsRepo;
-
-    @GetMapping("/")
-    public String greeting(Map<String, Object> model
-    ) {
-        return "greeting";
-    }
-
-    @GetMapping("/")
-    public String main(Model model){
-        Iterable<products> categories = ProductsRepo.findAll();
-
-        model.addAttribute("categories", categories);
-
-        return "products";
-    }*/
-
 }

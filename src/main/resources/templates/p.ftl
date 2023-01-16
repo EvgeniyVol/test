@@ -13,6 +13,11 @@
             <th></th>
             <th></th>
             <th></th>
+            <th>Пользователь: ${User}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th><form action="orders" >
 
                     <div><input type="submit" value="Корзина"/></div>
@@ -23,6 +28,7 @@
             <th></th>
             <th></th>
             <th><@l.logout /></th>
+
         </tr>
     </table>
 
